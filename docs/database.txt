@@ -1,0 +1,10 @@
+Basic Id etc etc...
+/1 na start dodac uzytkownika register login jwt
+/2 pliki dodaj usun edytuj 
+
+Postgres:
+
+FileEntity ->
+    name
+    
+Users ->
