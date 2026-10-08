@@ -7,6 +7,7 @@ using api.Models;
 using api.Models.Enums;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.WebUtilities;
 namespace api.Services
 {
     public static class JWT
@@ -43,13 +44,16 @@ namespace api.Services
             return new JwtSecurityTokenHandler().WriteToken(Token);
 
         }
-        public static (string RefreshToken,DateTime ExpAt) GenerateRefreshToken()
+        public static (string RefreshTokenPlain,string RefreshTokenHash,DateTime ExpAt) GenerateRefreshToken()
         {
-            throw new NotImplementedException();
+            var jwtAD = int.TryParse(SafeEnvironment.GetSafeEnvironment("JWT_AD"),out var m) ? m : 45;
+            var expAt = DateTime.UtcNow.AddDays(jwtAD);
+            var bytes = RandomNumberGenerator.GetBytes(32);
+            var plain = WebEncoders.Base64UrlEncode(bytes);
+            var hash = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(plain)));
+            return (plain,hash,expAt);
+            
         }
-        public static string HashRefreshToken()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
