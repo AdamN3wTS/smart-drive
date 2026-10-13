@@ -1,7 +1,7 @@
 *.env
 appsettings.json
 appsettings.Development.json
-/bin
-/obj
+*/bin
+*/obj
 /.next
 /node_modules
