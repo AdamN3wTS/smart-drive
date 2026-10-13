@@ -2,13 +2,12 @@ using System;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using api.Helpers;
 using api.Models;
 using api.Models.Enums;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.WebUtilities;
-namespace api.Services
+namespace api.Helpers
 {
     public static class JWT
     {
