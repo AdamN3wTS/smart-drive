@@ -87,7 +87,7 @@ namespace api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("hash");
 
-                    b.Property<Guid>("ParentId")
+                    b.Property<Guid?>("ParentId")
                         .HasColumnType("uuid")
                         .HasColumnName("parent_id");
 
@@ -99,11 +99,18 @@ namespace api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("revoked_reason");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_refresh_tokens");
 
                     b.HasIndex("ParentId")
                         .HasDatabaseName("ix_refresh_tokens_parent_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_refresh_tokens_user_id");
 
                     b.ToTable("refresh_tokens", (string)null);
                 });
@@ -152,11 +159,18 @@ namespace api.Migrations
                     b.HasOne("api.Models.RefreshToken", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_refresh_tokens_refresh_tokens_parent_id");
 
+                    b.HasOne("api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_refresh_tokens_users_user_id");
+
                     b.Navigation("Parent");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

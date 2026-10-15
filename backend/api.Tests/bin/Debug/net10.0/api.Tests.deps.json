@@ -331,6 +331,17 @@
           "api.Tests.dll": {}
         }
       },
+      "BCrypt.Net-Next/4.2.0": {
+        "runtime": {
+          "lib/net10.0/BCrypt-Net-Next.dll": {
+            "assemblyVersion": "4.2.0.0",
+            "fileVersion": "4.2.0.0"
+          }
+        },
+        "compile": {
+          "lib/net10.0/BCrypt-Net-Next.dll": {}
+        }
+      },
       "DotNetEnv/3.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "10.0.13",
@@ -1453,6 +1464,7 @@
       },
       "api/1.0.0": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.2.0",
           "DotNetEnv": "3.2.0",
           "EFCore.NamingConventions": "10.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.12",
@@ -3182,6 +3194,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BCrypt.Net-Next/4.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gwLD2KfCuwQesP17aVh4h6lpiMPEVt5Lbpndo0ej903hNUUTtyxt3ARdDjmuydBRTAUICc7OVKVbaOvc6SQYXA==",
+      "path": "bcrypt.net-next/4.2.0",
+      "hashPath": "bcrypt.net-next.4.2.0.nupkg.sha512"
     },
     "DotNetEnv/3.2.0": {
       "type": "package",

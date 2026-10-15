@@ -45,8 +45,10 @@ builder.Services.AddAuthentication().AddJwtBearer(o =>
     };
 });
 builder.Services.AddAuthorization();
-builder.Services.AddSingleton<IAuthService,AuthService>();
-builder.Services.AddSingleton<IUserDbService,UserDbService>();
+builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IUserDbService,UserDbService>();
+builder.Services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
+
 
 var app = builder.Build();
 
