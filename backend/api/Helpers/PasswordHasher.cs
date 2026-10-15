@@ -6,10 +6,10 @@ public static class PasswordHasher
 {
     public static string PasswordHash(string password)
     {
-        return BC.HashPassword(password,salt: BC.GenerateSalt(),enhancedEntropy:true,hashType:BCrypt.Net.HashType.SHA384);
+        return BC.HashPassword(password);
     }
     public static bool PasswordVerify(string hash,string password)
     {
-        return BC.Verify(password,hash,hashType:BCrypt.Net.HashType.SHA384);
+        return BC.Verify(password,hash);
     }
 }
