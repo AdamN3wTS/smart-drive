@@ -438,3 +438,4 @@
 /Users/adamjanus/code/smart-drive/backend/api.Tests/obj/Debug/net10.0/api.Tests.genruntimeconfig.cache
 /Users/adamjanus/code/smart-drive/backend/api.Tests/obj/Debug/net10.0/ref/api.Tests.dll
 /Users/adamjanus/code/smart-drive/backend/api.Tests/bin/Debug/net10.0/BCrypt-Net-Next.dll
+/Users/adamjanus/code/smart-drive/backend/api.Tests/bin/Debug/net10.0/.env.test
