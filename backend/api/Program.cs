@@ -47,6 +47,8 @@ builder.Services.AddAuthentication().AddJwtBearer(o =>
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IAuthService,AuthService>();
 builder.Services.AddSingleton<IUserDbService,UserDbService>();
+builder.Services.AddSingleton<IRefreshTokenDbService,RefreshTokenDbService>();
+
 
 var app = builder.Build();
 

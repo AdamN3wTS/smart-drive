@@ -8,6 +8,7 @@ public interface IUserDbService
     // TODO User - > UserDto
     public Task<User?> GetUserByIdAsync(Guid Id,CancellationToken ct);
     public  Task<User> AddUserAsync(User User,CancellationToken ct);
+    public  Task<User?> GetUserByNameEmailASync(string NameEmail,CancellationToken ct);
 
     
 }

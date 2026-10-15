@@ -15,8 +15,8 @@ public class UserDbService : IUserDbService
     }
     public async Task<User?> GetUserByIdAsync(Guid Id,CancellationToken ct)
     {
-        var User = await _appDbContext.Users.FirstOrDefaultAsync(p=>p.Id==Id,ct);
-        return User;
+        var user = await _appDbContext.Users.FirstOrDefaultAsync(p=>p.Id==Id,ct);
+        return user;
     }
     public async Task<User> AddUserAsync(User User,CancellationToken ct)
     {
@@ -24,5 +24,10 @@ public class UserDbService : IUserDbService
         await _appDbContext.SaveChangesAsync(ct);
         return User;
         
+    }
+    public async Task<User?> GetUserByNameEmailASync(string NameEmail,CancellationToken ct)
+    {
+        var user = await _appDbContext.Users.FirstOrDefaultAsync(p=>p.Email==NameEmail || p.Name==NameEmail,ct);
+        return user;
     }
 }
