@@ -87,10 +87,10 @@ namespace api.Controllers
         [HttpGet("me")]
         public async Task<IActionResult> Me(CancellationToken ct)
         {
-            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if(userId==null || String.IsNullOrWhiteSpace(userId))
             {
-                return NotFound();
+                return NotFound("Not logged");
             }
             var user = await _authService.Me(userId,ct);
             return Ok(user);

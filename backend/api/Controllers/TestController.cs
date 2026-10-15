@@ -10,11 +10,12 @@ namespace api.Controllers
     public class TestController : ControllerBase
     {
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet]
+        [HttpGet("private")]
         public async Task<IActionResult> Private()
         {
             return Ok("private ok");
         }
+        [HttpGet("public")]
         public async Task<IActionResult> Public()
         {
             return Ok("public ok");

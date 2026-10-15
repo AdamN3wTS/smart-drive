@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class SUPERSUPER : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,30 +30,6 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "refresh_tokens",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    hash = table.Column<string>(type: "text", nullable: false),
-                    exp_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    revoked_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    revoked_reason = table.Column<string>(type: "text", nullable: true),
-                    parent_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_refresh_tokens", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_refresh_tokens_refresh_tokens_parent_id",
-                        column: x => x.parent_id,
-                        principalTable: "refresh_tokens",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
                 {
@@ -70,10 +46,45 @@ namespace api.Migrations
                     table.PrimaryKey("pk_users", x => x.id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "refresh_tokens",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    hash = table.Column<string>(type: "text", nullable: false),
+                    exp_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    revoked_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    revoked_reason = table.Column<string>(type: "text", nullable: true),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    parent_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_refresh_tokens", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_refresh_tokens_refresh_tokens_parent_id",
+                        column: x => x.parent_id,
+                        principalTable: "refresh_tokens",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_refresh_tokens_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_refresh_tokens_parent_id",
                 table: "refresh_tokens",
                 column: "parent_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_refresh_tokens_user_id",
+                table: "refresh_tokens",
+                column: "user_id");
         }
 
         /// <inheritdoc />
