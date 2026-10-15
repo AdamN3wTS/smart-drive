@@ -268,3 +268,4 @@
 /Users/adamjanus/code/smart-drive/backend/api/obj/Debug/net10.0/api.pdb
 /Users/adamjanus/code/smart-drive/backend/api/obj/Debug/net10.0/api.genruntimeconfig.cache
 /Users/adamjanus/code/smart-drive/backend/api/obj/Debug/net10.0/ref/api.dll
+/Users/adamjanus/code/smart-drive/backend/api/bin/Debug/net10.0/BCrypt-Net-Next.dll

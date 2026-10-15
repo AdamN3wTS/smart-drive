@@ -4,6 +4,10 @@ using api.Helpers;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
+using api.IDbServices;
+using api.DbServices;
+using api.IDbService;
+using api.DbService;
 
 DotNetEnv.Env.Load();
 
@@ -41,6 +45,11 @@ builder.Services.AddAuthentication().AddJwtBearer(o =>
     };
 });
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IUserDbService,UserDbService>();
+builder.Services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

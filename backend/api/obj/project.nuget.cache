@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FUN/6ke3pxU=",
+  "dgSpecHash": "IdWDfS4qy+o=",
   "success": true,
   "projectFilePath": "/Users/adamjanus/code/smart-drive/backend/api/api.csproj",
   "expectedPackageFiles": [
+    "/Users/adamjanus/.nuget/packages/bcrypt.net-next/4.2.0/bcrypt.net-next.4.2.0.nupkg.sha512",
     "/Users/adamjanus/.nuget/packages/dotnetenv/3.2.0/dotnetenv.3.2.0.nupkg.sha512",
     "/Users/adamjanus/.nuget/packages/efcore.namingconventions/10.0.1/efcore.namingconventions.10.0.1.nupkg.sha512",
     "/Users/adamjanus/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
