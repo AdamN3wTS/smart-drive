@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="CloudFlare.NET" Version="0.1.1" />
+    <PackageReference Include="Cloudflare.NET.R2" Version="2.5.0" />
     <PackageReference Include="DotNetEnv" Version="3.2.0" />
     <PackageReference Include="EFCore.NamingConventions" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.12" />

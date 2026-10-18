@@ -19,9 +19,13 @@
     <Import Project="$(NuGetPackageRoot)microsoft.testplatform.testhost/17.14.1/build/net8.0/Microsoft.TestPlatform.TestHost.props" Condition="Exists('$(NuGetPackageRoot)microsoft.testplatform.testhost/17.14.1/build/net8.0/Microsoft.TestPlatform.TestHost.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.codecoverage/17.14.1/build/netstandard2.0/Microsoft.CodeCoverage.props" Condition="Exists('$(NuGetPackageRoot)microsoft.codecoverage/17.14.1/build/netstandard2.0/Microsoft.CodeCoverage.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.net.test.sdk/17.14.1/build/net8.0/Microsoft.NET.Test.Sdk.props" Condition="Exists('$(NuGetPackageRoot)microsoft.net.test.sdk/17.14.1/build/net8.0/Microsoft.NET.Test.Sdk.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.telemetry.abstractions/8.0.0/buildTransitive/net6.0/Microsoft.Extensions.Telemetry.Abstractions.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.telemetry.abstractions/8.0.0/buildTransitive/net6.0/Microsoft.Extensions.Telemetry.Abstractions.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets/10.0.13/buildTransitive/net8.0/Microsoft.Extensions.Configuration.UserSecrets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets/10.0.13/buildTransitive/net8.0/Microsoft.Extensions.Configuration.UserSecrets.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">/Users/adamjanus/.nuget/packages/xunit.analyzers/1.18.0</Pkgxunit_analyzers>
+    <PkgMicrosoft_Bcl_Build Condition=" '$(PkgMicrosoft_Bcl_Build)' == '' ">/Users/adamjanus/.nuget/packages/microsoft.bcl.build/1.0.14</PkgMicrosoft_Bcl_Build>
+    <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">/Users/adamjanus/.nuget/packages/awssdk.core/4.0.3.3</PkgAWSSDK_Core>
+    <PkgAWSSDK_S3 Condition=" '$(PkgAWSSDK_S3)' == '' ">/Users/adamjanus/.nuget/packages/awssdk.s3/4.0.7.1</PkgAWSSDK_S3>
   </PropertyGroup>
 </Project>
