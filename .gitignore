@@ -1,7 +1,9 @@
 *.env
+*.env.test
 appsettings.json
 appsettings.Development.json
 /bin
 /obj
 /.next
 /node_modules
+*.tfy

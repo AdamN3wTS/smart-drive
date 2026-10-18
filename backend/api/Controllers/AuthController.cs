@@ -6,9 +6,11 @@ using api.Dtos;
 using api.Helpers;
 using api.IDbServices;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace api.Controllers
 {
@@ -71,7 +73,7 @@ namespace api.Controllers
             }
             return BadRequest(ResponseHelper.GenerateResponse<object?>(null,false,"failed"));
         }
-        [Authorize]
+        [Authorize(AuthenticationSchemes=JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout(CancellationToken ct)
         {
@@ -84,6 +86,7 @@ namespace api.Controllers
             var serviceResult = await _authService.Logout(token,ct);
             return Ok(serviceResult);
         }
+        [Authorize(AuthenticationSchemes=JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("me")]
         public async Task<IActionResult> Me(CancellationToken ct)
         {

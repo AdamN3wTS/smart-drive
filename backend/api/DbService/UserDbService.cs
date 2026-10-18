@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlTypes;
 using api.Data;
 using api.IDbService;
 using api.Models;
@@ -18,11 +19,21 @@ public class UserDbService : IUserDbService
         var user = await _appDbContext.Users.FirstOrDefaultAsync(p=>p.Id==Id,ct);
         return user;
     }
-    public async Task<User> AddUserAsync(User User,CancellationToken ct)
+    public async Task<User?> AddUserAsync(User User,CancellationToken ct)
     {
+        try{
         await _appDbContext.Users.AddAsync(User,ct);
         await _appDbContext.SaveChangesAsync(ct);
         return User;
+        }
+        catch(DbUpdateException ex)
+        {
+            return null;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
         
     }
     public async Task<User?> GetUserByNameEmailASync(string NameEmail,CancellationToken ct)

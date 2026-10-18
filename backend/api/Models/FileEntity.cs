@@ -10,5 +10,7 @@ public class FileEntity : BasicEntity
     public FileStatus Status {get;set;}
     public string? ContentType {get;set;}
     public decimal? FileSizeByte {get;set;}
+    public User User {get;set;}
+    public Guid UserId {get;set;}
 
 }

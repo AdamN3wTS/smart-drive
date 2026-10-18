@@ -12,7 +12,7 @@ using api.DbService;
 DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRINGTEST");
 
 if (connectionString == null)
 {
@@ -64,3 +64,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }

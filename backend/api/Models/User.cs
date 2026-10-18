@@ -9,4 +9,5 @@ public class User : BasicEntity
     public required string Email {get;set;} 
     public string? PasswordHash {get;set;}
     public RoleEnum Role {get;set;} = RoleEnum.User;
+    public ICollection<FileEntity> Files {get;set;} = new List<FileEntity>();
 }

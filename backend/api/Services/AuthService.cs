@@ -62,7 +62,7 @@ public class AuthService : IAuthService
         }
     }
 
-    public async Task<ResponseDto<RegisterServiceResponseDto>> Register(RegisterUserDto dto,CancellationToken ct)
+    public async Task<ResponseDto<RegisterServiceResponseDto?>> Register(RegisterUserDto dto,CancellationToken ct)
     {
         try
         {
@@ -75,6 +75,10 @@ public class AuthService : IAuthService
                 PasswordHash=passwordHash
             };
             var userDbServiceResult = await _userDbService.AddUserAsync(User,ct);
+            if (userDbServiceResult == null)
+            {
+                return ResponseHelper.GenerateResponse<RegisterServiceResponseDto?>(null,false,"RegisterSuccess");
+            }
             var (refreshTokenPlain,refreshTokenHash,expAt) = JWT.GenerateRefreshToken();
             var refreshToken= new RefreshToken()
             {
@@ -90,7 +94,7 @@ public class AuthService : IAuthService
               refreshTokenPlain=refreshTokenPlain,
               accessToken=accessToken  
             };
-            return ResponseHelper.GenerateResponse<RegisterServiceResponseDto>(responseDto,true,"RegisterSuccess");
+            return ResponseHelper.GenerateResponse<RegisterServiceResponseDto?>(responseDto,true,"RegisterSuccess");
         }
         catch(Exception ex)
         {
