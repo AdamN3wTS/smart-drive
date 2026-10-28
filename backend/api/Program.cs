@@ -8,10 +8,20 @@ using api.IDbServices;
 using api.DbServices;
 using api.IDbService;
 using api.DbService;
+using api.IServices;
+using api.Services;
+using Cloudflare.NET.Core;
+using Cloudflare.NET.R2;
 
 DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
+Console.WriteLine($"CWD: {Directory.GetCurrentDirectory()}");
+Console.WriteLine($".env exists: {File.Exists(".env")}");
+Console.WriteLine($"ENV R2__AccessKeyId: {Environment.GetEnvironmentVariable("R2__AccessKeyId") is not null}");
+Console.WriteLine($"CFG R2:AccessKeyId: {builder.Configuration["R2:AccessKeyId"] is not null}");
+builder.Services.AddCloudflareApiClient(builder.Configuration);
+builder.Services.AddCloudflareR2Client(builder.Configuration);
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRINGTEST");
 
 if (connectionString == null)
@@ -48,6 +58,9 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IUserDbService,UserDbService>();
 builder.Services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
+builder.Services.AddScoped<IMediaUploadService,MediaUploadService>();
+builder.Services.AddScoped<IFileDbService,FileDbService>();
+
 
 
 var app = builder.Build();

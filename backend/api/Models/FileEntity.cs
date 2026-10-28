@@ -9,7 +9,8 @@ public class FileEntity : BasicEntity
     public string? FileUrl {get;set;}
     public FileStatus Status {get;set;}
     public string? ContentType {get;set;}
-    public decimal? FileSizeByte {get;set;}
+    public long? ContentLength {get;set;}
+    public string Key {get;set;}
     public User User {get;set;}
     public Guid UserId {get;set;}
 
