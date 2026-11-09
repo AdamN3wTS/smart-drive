@@ -12,10 +12,12 @@ namespace api.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
-        private IMediaUploadService _uploadService;
-        public FileController(IMediaUploadService mediaUploadService)
+        private readonly IMediaUploadService _uploadService;
+        private readonly IAiService _aiService;
+        public FileController(IMediaUploadService mediaUploadService,IAiService aiService)
         {
             _uploadService=mediaUploadService;
+            _aiService=aiService;
         }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("upload")]
@@ -40,6 +42,23 @@ namespace api.Controllers
                 return NotFound("Not logged");
             }
             var serviceResult = await _uploadService.UploadDone(fileId,ct);
+            if (serviceResult.Success == true)
+            {
+                await _aiService.AddFile(serviceResult.Data!,fileId.ToString(),userId);
+            }
+            return Ok(serviceResult);
+        }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("search")]
+        public async Task<IActionResult> UploadFileDone([FromQuery] string queryParam,CancellationToken ct)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(userId==null || String.IsNullOrWhiteSpace(userId))
+            {
+                return NotFound("Not logged");
+            }
+            var serviceResult = await _aiService.SearchFiles(queryParam,userId.ToString());
+            
             return Ok(serviceResult);
         }
     }

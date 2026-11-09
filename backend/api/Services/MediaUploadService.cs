@@ -41,11 +41,12 @@ public class MediaUploadService : IMediaUploadService
             ContentType:dto.ContentType,
             ContentLength:dto.ContentLength
         ));
+        
         var fileService = await _fileDbService.UploadFile(file,ct);
         return ResponseHelper.GenerateResponse<UploadFileResponseDto?>(new UploadFileResponseDto(){Url=url,FileId=fileId},true,"success");
     }
 
-    public async Task<ResponseDto<bool?>> UploadDone(Guid FileId, CancellationToken ct)
+    public async Task<ResponseDto<string?>> UploadDone(Guid FileId, CancellationToken ct)
     {
         var file = await _fileDbService.GetFileByIdAsync(FileId,ct);
         if (file == null)
@@ -64,6 +65,10 @@ public class MediaUploadService : IMediaUploadService
             throw new Exception();
         }
         file.Status=Models.Enums.FileStatus.added;
-        return ResponseHelper.GenerateResponse<bool?>(true,true,"success");
+        var downloadUrl = _r2Client.CreatePresignedGetUrl(Bucket, new PresignedGetRequest(
+        Key: file.Key,
+        ExpiresAfter: TimeSpan.FromMinutes(15)
+    ));
+        return ResponseHelper.GenerateResponse<string?>(downloadUrl,true,"success");
     }
 }
