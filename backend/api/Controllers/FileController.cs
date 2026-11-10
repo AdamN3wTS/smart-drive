@@ -14,10 +14,13 @@ namespace api.Controllers
     {
         private readonly IMediaUploadService _uploadService;
         private readonly IAiService _aiService;
-        public FileController(IMediaUploadService mediaUploadService,IAiService aiService)
+        private readonly IFileService _fileService;
+
+        public FileController(IMediaUploadService mediaUploadService,IAiService aiService,IFileService fileService)
         {
             _uploadService=mediaUploadService;
             _aiService=aiService;
+            _fileService=fileService;
         }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("upload")]
@@ -61,5 +64,18 @@ namespace api.Controllers
             
             return Ok(serviceResult);
         }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("files")]
+        public async Task<IActionResult> GetFiles(CancellationToken ct)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(userId==null || String.IsNullOrWhiteSpace(userId))
+            {
+                return NotFound("Not logged");
+            }
+            var serviceResult = await _fileService.GetFilesForUser(Guid.Parse(userId),ct);
+            return Ok(serviceResult);
+        }
+
     }
 }
