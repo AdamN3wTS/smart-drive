@@ -22,7 +22,7 @@ export async function register(name:string,email:string,password:string,confirmP
             "Content-Type": "application/json"
         },
         credentials:"include",
-        body: JSON.stringify({Name:name,Email:email,Password:password,ConfirmPassword:confirmPassword})
+        body: JSON.stringify({Username:name,Email:email,Password:password,VerifyPassword:confirmPassword})
     })
     return safeJson(req);
 }

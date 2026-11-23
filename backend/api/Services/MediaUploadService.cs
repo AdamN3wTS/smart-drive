@@ -46,7 +46,7 @@ public class MediaUploadService : IMediaUploadService
         return ResponseHelper.GenerateResponse<UploadFileResponseDto?>(new UploadFileResponseDto(){Url=url,FileId=fileId},true,"success");
     }
 
-    public async Task<ResponseDto<string?>> UploadDone(Guid FileId, CancellationToken ct)
+    public async Task<ResponseDto<FileEntity?>> UploadDone(Guid FileId, CancellationToken ct)
     {
         var file = await _fileDbService.GetFileByIdAsync(FileId,ct);
         if (file == null)
@@ -68,7 +68,8 @@ public class MediaUploadService : IMediaUploadService
         var downloadUrl = _r2Client.CreatePresignedGetUrl(Bucket, new PresignedGetRequest(
         Key: file.Key,
         ExpiresAfter: TimeSpan.FromMinutes(15)
-    ));
-        return ResponseHelper.GenerateResponse<string?>(downloadUrl,true,"success");
+        ));
+        file.FileUrl=downloadUrl;
+        return ResponseHelper.GenerateResponse<FileEntity?>(file,true,"success");
     }
 }

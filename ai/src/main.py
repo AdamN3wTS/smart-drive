@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from embedding import file_embedding,vectorize_query
 from db import add_db,search as serach_db
 from fastapi.middleware.cors import CORSMiddleware
-
+from dotenv import load_dotenv
+load_dotenv()
 app = FastAPI(title="smart-drive-ai")
 app.add_middleware(
     CORSMiddleware,
@@ -24,8 +25,8 @@ def search(query:str,col:str):
     return {"status":"ok",
             "data":output}
 @app.post("/add")
-def add(file_url:str,file_id:str,col:str):
-    points = file_embedding(file_url,file_id)
+def add(file_url:str,file_id:str,col:str,content_type:str):
+    points = file_embedding(file_url,file_id,content_type)
     add_db(points=points,collection=col)
     return {"status":"ok"}
 

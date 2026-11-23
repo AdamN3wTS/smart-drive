@@ -47,7 +47,7 @@ namespace api.Controllers
             var serviceResult = await _uploadService.UploadDone(fileId,ct);
             if (serviceResult.Success == true)
             {
-                await _aiService.AddFile(serviceResult.Data!,fileId.ToString(),userId);
+                await _aiService.AddFile(serviceResult.Data.FileUrl,fileId.ToString(),serviceResult.Data.ContentType,userId);
             }
             return Ok(serviceResult);
         }

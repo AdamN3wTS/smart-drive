@@ -14,7 +14,7 @@ namespace api.Services
 			_url = Environment.GetEnvironmentVariable("AI_URL")!;
 			_logger=logger;
 		}
-		public async Task AddFile(string url,string id,string userId)
+		public async Task AddFile(string url,string id,string contentType,string userId)
 		{
 			try
 			{
@@ -22,7 +22,8 @@ namespace api.Services
 				{
 					["file_url"] = url,
 					["file_id"] = id,
-					["col"] = userId
+					["col"] = userId,
+					["content_type"] = contentType 
 				};
 				var queryString = await new FormUrlEncodedContent(queryParams).ReadAsStringAsync();
 				var response = await _httpClient.PostAsync($"{_url}/add?{queryString}",null);
