@@ -60,6 +60,10 @@ builder.Services.AddScoped<IUserDbService,UserDbService>();
 builder.Services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
 builder.Services.AddScoped<IMediaUploadService,MediaUploadService>();
 builder.Services.AddScoped<IFileDbService,FileDbService>();
+builder.Services.AddScoped<IFileService,FileService>();
+
+builder.Services.AddHttpClient<IAiService,AiService>();
+
 
 
 

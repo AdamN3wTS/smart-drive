@@ -36,4 +36,10 @@ public class FileDbService:IFileDbService
         await _appDbContext.SaveChangesAsync();
         return file;
     }
+
+    public async Task<List<FileEntity>> GetFilesForUserAsync(Guid UserId, CancellationToken ct)
+    {
+        var files = await _appDbContext.Files.Where(p=>p.UserId==UserId && p.DeletedAt==null).ToListAsync(ct);
+        return files;
+    }
 }
