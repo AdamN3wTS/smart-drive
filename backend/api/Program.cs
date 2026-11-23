@@ -12,6 +12,7 @@ using api.IServices;
 using api.Services;
 using Cloudflare.NET.Core;
 using Cloudflare.NET.R2;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 DotNetEnv.Env.Load();
 
@@ -73,8 +74,13 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseHttpsRedirection();
+app.UseRouting();
+// app.UseHttpsRedirection();
+app.UseCors(builder => builder
+    .WithOrigins("http://localhost:3000")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
 app.UseAuthentication();
 app.UseAuthorization();
 
