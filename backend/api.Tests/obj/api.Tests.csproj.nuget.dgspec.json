@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/adamjanus/code/smart-drive/backend/api.Tests/api.Tests.csproj": {}
+    "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api.Tests\\api.Tests.csproj": {}
   },
   "projects": {
-    "/Users/adamjanus/code/smart-drive/backend/api.Tests/api.Tests.csproj": {
+    "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api.Tests\\api.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/adamjanus/code/smart-drive/backend/api.Tests/api.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api.Tests\\api.Tests.csproj",
         "projectName": "api.Tests",
-        "projectPath": "/Users/adamjanus/code/smart-drive/backend/api.Tests/api.Tests.csproj",
-        "packagesPath": "/Users/adamjanus/.nuget/packages/",
-        "outputPath": "/Users/adamjanus/code/smart-drive/backend/api.Tests/obj/",
+        "projectPath": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api.Tests\\api.Tests.csproj",
+        "packagesPath": "C:\\Users\\abc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api.Tests\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/adamjanus/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\abc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -27,8 +34,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Users/adamjanus/code/smart-drive/backend/api/api.csproj": {
-                "projectPath": "/Users/adamjanus/code/smart-drive/backend/api/api.csproj"
+              "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api\\api.csproj": {
+                "projectPath": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api\\api.csproj"
               }
             }
           }
@@ -87,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -365,22 +372,29 @@
         }
       }
     },
-    "/Users/adamjanus/code/smart-drive/backend/api/api.csproj": {
+    "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/adamjanus/code/smart-drive/backend/api/api.csproj",
+        "projectUniqueName": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "/Users/adamjanus/code/smart-drive/backend/api/api.csproj",
-        "packagesPath": "/Users/adamjanus/.nuget/packages/",
-        "outputPath": "/Users/adamjanus/code/smart-drive/backend/api/obj/",
+        "projectPath": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api\\api.csproj",
+        "packagesPath": "C:\\Users\\abc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abc\\Desktop\\smart-drive\\backend\\api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/adamjanus/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\abc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -431,10 +445,6 @@
               "target": "Package",
               "version": "[10.0.12, )"
             },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[10.0.12, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[10.0.12, )"
@@ -456,6 +466,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[10.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.*, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -481,7 +495,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

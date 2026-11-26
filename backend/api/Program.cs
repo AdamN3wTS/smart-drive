@@ -3,15 +3,28 @@ using api.Data;
 using api.Helpers;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
+using Microsoft.OpenApi;
+
 using Microsoft.EntityFrameworkCore;
 using api.IDbServices;
 using api.DbServices;
 using api.IDbService;
 using api.DbService;
+using api.IServices;
+using api.Services;
+using Cloudflare.NET.Core;
+using Cloudflare.NET.R2;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
+Console.WriteLine($"CWD: {Directory.GetCurrentDirectory()}");
+Console.WriteLine($".env exists: {File.Exists(".env")}");
+Console.WriteLine($"ENV R2__AccessKeyId: {Environment.GetEnvironmentVariable("R2__AccessKeyId") is not null}");
+Console.WriteLine($"CFG R2:AccessKeyId: {builder.Configuration["R2:AccessKeyId"] is not null}");
+builder.Services.AddCloudflareApiClient(builder.Configuration);
+builder.Services.AddCloudflareR2Client(builder.Configuration);
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRINGTEST");
 
 if (connectionString == null)
@@ -21,7 +34,8 @@ if (connectionString == null)
 Console.WriteLine("1");
 builder.Services.AddDbContext<AppDbContext>(o=>o.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 Console.WriteLine("2");
 
 builder.Services.AddAuthentication().AddJwtBearer(o =>
@@ -48,16 +62,40 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IUserDbService,UserDbService>();
 builder.Services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
+builder.Services.AddScoped<IMediaUploadService,MediaUploadService>();
+builder.Services.AddScoped<IFileDbService,FileDbService>();
+builder.Services.AddScoped<IFileService,FileService>();
+
+builder.Services.AddHttpClient<IAiService,AiService>();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",          
+        BearerFormat = "JWT"
+        
+    });
+
+    c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("bearer", document)] = []
+    });
+});
 
 
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
+app.UseRouting();
+// app.UseHttpsRedirection();
+app.UseCors(builder => builder
+    .WithOrigins("http://localhost:3000")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
 app.UseAuthentication();
 app.UseAuthorization();
 

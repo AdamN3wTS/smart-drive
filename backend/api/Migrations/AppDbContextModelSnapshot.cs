@@ -29,6 +29,10 @@ namespace api.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<long?>("ContentLength")
+                        .HasColumnType("bigint")
+                        .HasColumnName("content_length");
+
                     b.Property<string>("ContentType")
                         .HasColumnType("text")
                         .HasColumnName("content_type");
@@ -45,20 +49,28 @@ namespace api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("file_name");
 
-                    b.Property<decimal?>("FileSizeByte")
-                        .HasColumnType("numeric")
-                        .HasColumnName("file_size_byte");
-
                     b.Property<string>("FileUrl")
                         .HasColumnType("text")
                         .HasColumnName("file_url");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("key");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_files");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_files_user_id");
 
                     b.ToTable("files", (string)null);
                 });
@@ -159,6 +171,18 @@ namespace api.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("api.Models.FileEntity", b =>
+                {
+                    b.HasOne("api.Models.User", "User")
+                        .WithMany("Files")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_files_users_user_id");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("api.Models.RefreshToken", b =>
                 {
                     b.HasOne("api.Models.RefreshToken", "Parent")
@@ -176,6 +200,11 @@ namespace api.Migrations
                     b.Navigation("Parent");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("api.Models.User", b =>
+                {
+                    b.Navigation("Files");
                 });
 #pragma warning restore 612, 618
         }
